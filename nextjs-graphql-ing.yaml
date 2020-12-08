@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nextjs-graphql-virtual-host-ing
+spec:
+  tls:
+  - hosts:
+    - nextjs-graphql.fabianbrash.com
+    secretName: nextjs-graphql-fabianbash-com-prd-tls
+  rules:
+  - host: nextjs-graphql.fabianbrash.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: nextjs-graphql
+            port:
+              number: 5000
